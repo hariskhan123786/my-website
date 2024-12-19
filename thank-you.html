@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Thank You - Order Confirmation</title>
+    <link rel="stylesheet" href="thank-you-styles.css">
+    <link rel="icon" href="favicon.ico" type="image/x-icon">
+</head>
+<body>
+    <!-- Navbar -->
+    <header>
+        <div class="logo">RYOMEN WEARS</div>
+        <nav>
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="shipping.html">Shop</a></li>
+                <li><a href="#">Contact</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- Thank You Section -->
+    <section class="thank-you-container">
+        <div class="thank-you-message">
+            <h1>Thank You for Your Order!</h1>
+            <p>Your order has been successfully placed. We will process it soon.</p>
+            <p><strong>Order Number:</strong> #<span id="order-number"></span></p>
+            <p>We have sent a confirmation email to your provided email address.</p>
+            <a href="shipping.html" class="track-order-btn">Track Your Order</a>
+            <a href="index.html" class="home-btn">Back to Home</a>
+        </div>
+        <div class="thank-you-image">
+            <img src="https://via.placeholder.com/400x300" alt="Order Confirmation" loading="lazy">
+        </div>
+    </section>
+</body>
+<script>
+    // Generate a random order number
+    document.addEventListener("DOMContentLoaded", function () {
+        const orderNumberElement = document.getElementById("order-number");
+        const orderNumber = Math.floor(Math.random() * 1000000 + 100000);
+        orderNumberElement.textContent = orderNumber;
+    });
+</script>
+</html>

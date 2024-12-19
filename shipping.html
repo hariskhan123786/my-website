@@ -1,0 +1,109 @@
+ <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Shipping Page</title>
+    <link rel="stylesheet" href="shipping-styles.css">
+    <script defer src="shipping-script.js"></script>
+</head>
+<body>
+    <!-- Navbar -->
+    <header>
+        <div class="logo">RYOMEN WEARS</div>
+        <nav>
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="#">Shop</a></li>
+                <li><a href="#">Contact</a></li>
+                <li><a href="shipping.html">Cart</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- Shipping Container -->
+    <section class="shipping-container">
+        <h1>Shipping Information</h1>
+        <div class="content-wrapper">
+            <!-- Cart Summary -->
+            <div class="cart-summary">
+                <h2>Your Cart</h2>
+                <div class="cart-item">
+                    <img src="https://via.placeholder.com/100x120" alt="Plain Sweatshirt">
+                    <div>
+                        <h3>Plain Sweatshirt</h3>
+                        <p>Price: <span class="price">1999</span> PKR</p>
+                        <label>Quantity:</label>
+                        <input type="number" class="quantity" value="1" min="1">
+                    </div>
+                </div>
+                <div class="total">
+                    <h3>Total: Rs. <span id="total-price">1999</span> PKR</h3>
+                </div>
+            </div>
+
+            <!-- Shipping Form -->
+            <div class="shipping-form">
+                <h2>Enter Shipping Details</h2>
+                <form action="thank-you.html" method="post" id="shipping-form">
+                    <label for="name">Full Name</label>
+                    <input type="text" id="name" name="name" placeholder="Enter your full name" required>
+                
+                    <label for="address">Address</label>
+                    <input type="text" id="address" name="address" placeholder="Enter your shipping address" required>
+                
+                    <label for="city">City</label>
+                    <input type="text" id="city" name="city" placeholder="Enter your city" required>
+                
+                    <label for="phone">Phone Number</label>
+                    <input type="tel" id="phone" name="phone" placeholder="Enter your phone number" required>
+                
+                    <label for="email">Email</label>
+                    <input type="email" id="email" name="email" placeholder="Enter your email" required>
+                
+                    <!-- Submit Button -->
+                    <button type="submit">Submit</button>
+                </form>
+                <script>
+                    document.getElementById('shipping-form').addEventListener('submit', async (e) => {
+                        e.preventDefault();
+                        const formData = {
+                            name: e.target.name.value,
+                            address: e.target.address.value,
+                            email: e.target.email.value
+                        };
+                    
+                        try {
+                            const response = await fetch('http://localhost:3000/api/shipping', {
+                                method: 'POST',
+                                headers: { 'Content-Type': 'application/json' },
+                                body: JSON.stringify(formData)
+                            });
+                            const result = await response.json();
+                            alert(`Order Success! Order ID: ${result.orderId}`);
+                        } catch (error) {
+                            alert('Error placing order. Please try again.');
+                            console.error(error);
+                        }
+                    });
+                    </script>
+            </div>
+        </div>
+    </section>
+</body>
+<script>
+    document.getElementById("shipping-form").addEventListener("submit", function (e) {
+        const name = document.getElementById("name").value.trim();
+        const address = document.getElementById("address").value.trim();
+        const city = document.getElementById("city").value.trim();
+        const phone = document.getElementById("phone").value.trim();
+        const email = document.getElementById("email").value.trim();
+
+        if (!name || !address || !city || !phone || !email) {
+            e.preventDefault(); // Prevent submission
+            alert("Please fill in all the required fields before proceeding.");
+        }
+    });
+</script>
+
+</html>
